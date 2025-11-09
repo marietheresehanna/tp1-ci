@@ -1,10 +1,10 @@
-name: CI (dev)
+name: CI (dev & PRs)
 
 on:
   push:
-    branches: [ "dev" ]   # run only when we push to 'dev'
+    branches: [ "dev" ]         # run when we push to dev
   pull_request:
-    branches: [ "dev" ]   # also run on PRs targeting 'dev' (optional)
+    branches: [ "dev", "main" ] # also run when a PR targets dev or main
 
 jobs:
   test:
