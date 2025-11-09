@@ -1,0 +1,26 @@
+name: Main pipeline (post-merge)
+
+on:
+  push:
+    branches: [ "main" ]    # run only when main changes (i.e., after PRs are merged)
+  workflow_dispatch:         # allows you to run it manually from the Actions tab
+
+jobs:
+  test-on-main:
+    runs-on: ubuntu-latest         # fresh Linux VM
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4  # download the repo
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          # later we can add: pip install -r requirements.txt
+
+      - name: Run unit tests (on main)
+        run: python -m unittest -v
